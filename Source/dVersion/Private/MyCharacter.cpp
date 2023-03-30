@@ -3,6 +3,7 @@
 #include "MyCharacterStatComponent.h"
 #include "Components/WidgetComponent.h"
 #include "MyCharacterWidget.h"
+#include "EnemyFSM.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -228,6 +229,13 @@ void AMyCharacter::AttackCheck()
 
 			FDamageEvent DamageEvent;
 			HitResult.Actor->TakeDamage(CharacterStat->GetAttack(), DamageEvent, GetController(), this);
+
+			auto Enemy = HitResult.GetActor()->GetDefaultSubobjectByName(TEXT("FSM"));
+			if (Enemy)
+			{
+				auto EnemyFSM = Cast<UEnemyFSM>(Enemy);
+				EnemyFSM->OnDamageProcess();
+			}
 		}
 	}
 }

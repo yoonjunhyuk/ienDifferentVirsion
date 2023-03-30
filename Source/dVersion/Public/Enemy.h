@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "dVersion.h"
 #include "GameFramework/Character.h"
 #include "Enemy.generated.h"
 
@@ -26,4 +26,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = FSM)
+	class UEnemyFSM* FSM;
 };
